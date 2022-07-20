@@ -86,9 +86,6 @@ while (choice !== 0) {
             subMenu();
             chooseSubMenu();
             break;
-        default:
-            console.log(`Khong ton tai lua chon. Nhap lai!`);
-            break;
     }
 }
 

@@ -84,6 +84,9 @@ function chooseSubMenu() {
             break;
         case Choose.BACK:
             break;
+        default:
+            console.log(`Khong ton tai lua chon. Nhap lai!`);
+            break;
     }
 }
 while (choice !== 0) {

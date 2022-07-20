@@ -9,19 +9,19 @@ class Manager {
         this.list.push(data);
     }
     showAllInfo() {
-        console.log(this.list);
+        console.table(this.list);
     }
     findInfoByName(data) {
         let getIndex = 0;
         let flag = -1;
         this.list.forEach((value, index) => {
             if (value.getName() == data) {
-                console.log(this.list[index]);
+                console.table(this.list[index]);
                 flag++;
             }
         });
         if (flag == -1) {
-            console.log(`Khong co hoc sinh nao o trong nhom ${data}`);
+            console.log(`Khong co hoc sinh nao o trong ten ${data}`);
         }
     }
     findInfoByGroup(data) {
@@ -29,7 +29,7 @@ class Manager {
         let flag = -1;
         this.list.forEach((value, index) => {
             if (value.getGroup() == data) {
-                console.log(this.list[index]);
+                console.table(this.list[index]);
                 flag++;
             }
         });
