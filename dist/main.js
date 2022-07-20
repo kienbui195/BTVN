@@ -56,7 +56,7 @@ function subMenu() {
     console.log(`2. TIm kiem theo nhom`);
     console.log(`0. Tro ve`);
 }
-function addFuture() {
+function addFeature() {
     console.log('');
     console.log(`=== Them hoc sinh ===`);
     let name = rl.question(`Nhap ten hoc sinh:`);
@@ -66,7 +66,7 @@ function addFuture() {
     let student = new Student_1.Student(name, age, group, email);
     list.addInfo(student);
 }
-function showFuture() {
+function showFeature() {
     console.log('');
     console.log(`=== Hien thi danh sach tat ca hoc sinh ===`);
     list.showAllInfo();
@@ -91,10 +91,10 @@ while (choice !== 0) {
     choice = +rl.question(`Moi ban nhap lua chon: `);
     switch (choice) {
         case Choice.ADD:
-            addFuture();
+            addFeature();
             break;
         case Choice.SHOW:
-            showFuture();
+            showFeature();
             break;
         case Choice.FIND:
             subMenu();
