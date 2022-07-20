@@ -13,24 +13,29 @@ class Manager {
     }
     findInfoByName(data) {
         let getIndex = 0;
+        let flag = -1;
         this.list.forEach((value, index) => {
             if (value.getName() == data) {
                 console.log(this.list[index]);
-            }
-            else {
-                console.log(`Khong co hoc sinh nao ten ${data}`);
+                flag++;
             }
         });
+        if (flag == -1) {
+            console.log(`Khong co hoc sinh nao o trong nhom ${data}`);
+        }
     }
     findInfoByGroup(data) {
         let getIndex = 0;
+        let flag = -1;
         this.list.forEach((value, index) => {
             if (value.getGroup() == data) {
                 console.log(this.list[index]);
+                flag++;
             }
-            else
-                console.log(`Khong co hoc sinh nao o trong nhom ${data}`);
         });
+        if (flag == -1) {
+            console.log(`Khong co hoc sinh nao o trong nhom ${data}`);
+        }
     }
 }
 exports.Manager = Manager;

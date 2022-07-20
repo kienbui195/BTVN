@@ -59,10 +59,10 @@ function subMenu() {
 function addFeature() {
     console.log('');
     console.log(`=== Them hoc sinh ===`);
-    let name = rl.question(`Nhap ten hoc sinh:`);
-    let age = rl.question(`Nhap tuoi hoc sinh:`);
-    let group = rl.question(`Nhap nhom lop hoc sinh:`);
-    let email = rl.question(`Nhap email hoc sinh:`);
+    let name = rl.question(`Nhap ten hoc sinh: `);
+    let age = rl.question(`Nhap tuoi hoc sinh: `);
+    let group = rl.question(`Nhap nhom lop hoc sinh: `);
+    let email = rl.question(`Nhap email hoc sinh: `);
     let student = new Student_1.Student(name, age, group, email);
     list.addInfo(student);
 }
@@ -75,11 +75,11 @@ function chooseSubMenu() {
     choose = +rl.question(`Moi nhap lua chon: `);
     switch (choose) {
         case Choose.FINDBYNAME:
-            let findName = rl.question(`Nhap ten hoc sinh can tim kiem:`);
+            let findName = rl.question(`Nhap ten hoc sinh can tim kiem: `);
             list.findInfoByName(findName);
             break;
         case Choose.FINDBYGROUP:
-            let findByGroup = rl.question(`Nhap nhom hoc sinh can tim kiem:`);
+            let findByGroup = rl.question(`Nhap nhom hoc sinh can tim kiem: `);
             list.findInfoByGroup(findByGroup);
             break;
         case Choose.BACK:
