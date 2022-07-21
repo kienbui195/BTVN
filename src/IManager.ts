@@ -3,4 +3,6 @@ export interface IManager {
     showAllInfo(): void;
     findInfoByName(data: string): void;
     findInfoByGroup(data: string): void;
+    sortByAgeIncrease(): void;
+    sortByAgeDecrease(): void;
 }
