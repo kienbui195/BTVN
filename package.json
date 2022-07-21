@@ -4,6 +4,10 @@
   "dependencies": {
     "readline-sync": "^1.4.10"
   },
+  "scripts" : {
+    "start" : "node ./dist/main.js"
+
+  },
   "devDependencies": {
     "@types/node": "^18.0.6",
     "@types/readline-sync": "^1.4.4",

@@ -24,36 +24,37 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const rl = __importStar(require("readline-sync"));
-const Manager_1 = require("./Manager");
-const Student_1 = require("./Student");
-let list = new Manager_1.Manager();
-let choice = -1;
-let choose = -1;
-var Choice;
-(function (Choice) {
-    Choice[Choice["ADD"] = 1] = "ADD";
-    Choice[Choice["SHOW"] = 2] = "SHOW";
-    Choice[Choice["FIND"] = 3] = "FIND";
-})(Choice || (Choice = {}));
-var Choose;
-(function (Choose) {
-    Choose[Choose["FINDBYNAME"] = 1] = "FINDBYNAME";
-    Choose[Choose["FINDBYGROUP"] = 2] = "FINDBYGROUP";
-    Choose[Choose["BACK"] = 0] = "BACK";
-})(Choose || (Choose = {}));
+const Manager_1 = require("./src/Manager");
+const Student_1 = require("./src/Student");
+const ChoiceMain_1 = require("./enum/ChoiceMain");
+const ChoiceSub_Find_1 = require("./enum/ChoiceSub_Find");
+const ChoiceSub_Sort_1 = require("./enum/ChoiceSub_Sort");
+let manager = new Manager_1.Manager();
+let choiceMain = -1;
+let choiceSub1 = -1;
+let choiceSub2 = -1;
 function mainMenu() {
     console.log('');
     console.log(`==========  Menu  ==========`);
     console.log(`1. Them hoc sinh`);
     console.log(`2. Hien thi danh sach tat ca hoc sinh`);
     console.log(`3. Tim kiem hoc sinh`);
+    console.log(`4. Sap xep danh sach hoc sinh`);
+    console.log(`5. Xoa thong tin hoc sinh khoi danh sach`);
     console.log(`0. Thoat`);
 }
-function subMenu() {
+function subMenuFind() {
     console.log('');
     console.log(`=== Tim kiem hoc sinh ===`);
     console.log(`1. Tim kiem theo ten`);
     console.log(`2. TIm kiem theo nhom`);
+    console.log(`0. Tro ve`);
+}
+function subMenuSort() {
+    console.log('');
+    console.log(`=== Sap xep hoc sinh ===`);
+    console.log(`1. Sap xep theo thu tu tang dan`);
+    console.log(`2. Sap xep theo thu tu giam dan`);
     console.log(`0. Tro ve`);
 }
 function addFeature() {
@@ -64,44 +65,85 @@ function addFeature() {
     let group = rl.question(`Nhap nhom lop hoc sinh: `);
     let email = rl.question(`Nhap email hoc sinh: `);
     let student = new Student_1.Student(name, age, group, email);
-    list.addInfo(student);
+    manager.addInfo(student);
 }
 function showFeature() {
     console.log('');
     console.log(`=== Hien thi danh sach tat ca hoc sinh ===`);
-    list.showAllInfo();
+    manager.showAllInfo();
 }
-function chooseSubMenu() {
-    choose = +rl.question(`Moi nhap lua chon: `);
-    switch (choose) {
-        case Choose.FINDBYNAME:
+function choiceSubMenuFind() {
+    choiceSub1 = +rl.question(`Moi nhap lua chon: `);
+    switch (choiceSub1) {
+        case ChoiceSub_Find_1.ChoiceSub1.FINDBYNAME:
             let findName = rl.question(`Nhap ten hoc sinh can tim kiem: `);
-            list.findInfoByName(findName);
+            let resultF = manager.findInfoByName(findName);
+            if (resultF == null) {
+                console.log(`Khong co hoc sinh nao o trong ten ${findName}`);
+            }
+            else
+                console.table(resultF);
             break;
-        case Choose.FINDBYGROUP:
+        case ChoiceSub_Find_1.ChoiceSub1.FINDBYGROUP:
             let findByGroup = rl.question(`Nhap nhom hoc sinh can tim kiem: `);
-            list.findInfoByGroup(findByGroup);
+            manager.findInfoByGroup(findByGroup);
+            let resultG = manager.findInfoByName(findByGroup);
+            if (resultG == null) {
+                console.log(`Khong co hoc sinh nao o trong ten ${findByGroup}`);
+            }
+            else
+                console.table(resultG);
             break;
-        case Choose.BACK:
+        case ChoiceSub_Find_1.ChoiceSub1.BACK:
             break;
         default:
             console.log(`Khong ton tai lua chon. Nhap lai!`);
             break;
     }
 }
-while (choice !== 0) {
+function choiceSubMenuSort() {
+    choiceSub2 = +rl.question(`Moi nhap lua chon: `);
+    switch (choiceSub2) {
+        case ChoiceSub_Sort_1.ChoiceSub2.INCREASING:
+            manager.sortByAgeIncrease();
+            break;
+        case ChoiceSub_Sort_1.ChoiceSub2.DECREASE:
+            manager.sortByAgeDecrease();
+            break;
+        case ChoiceSub_Sort_1.ChoiceSub2.BACK:
+            break;
+        default:
+            console.log(`Khong ton tai lua chon, moi nhap lai!`);
+            break;
+    }
+}
+function deleteFeature() {
+    console.log('');
+    console.log(`=== Xoa thong tin hoc sinh khoi danh sach ===`);
+    manager.showAllInfo();
+    let index = +rl.question(`Moi nhap STT hoc sinh muon xoa trong danh sach: `);
+    manager.deleteInfo(index);
+}
+while (choiceMain !== 0) {
     mainMenu();
-    choice = +rl.question(`Moi ban nhap lua chon: `);
-    switch (choice) {
-        case Choice.ADD:
+    choiceMain = +rl.question(`Moi ban nhap lua chon: `);
+    switch (choiceMain) {
+        case ChoiceMain_1.ChoiceMain.ADD:
             addFeature();
             break;
-        case Choice.SHOW:
+        case ChoiceMain_1.ChoiceMain.SHOW:
             showFeature();
             break;
-        case Choice.FIND:
-            subMenu();
-            chooseSubMenu();
+        case ChoiceMain_1.ChoiceMain.FIND:
+            subMenuFind();
+            choiceSubMenuFind();
+            break;
+        case ChoiceMain_1.ChoiceMain.SORT:
+            subMenuSort();
+            choiceSubMenuSort();
+            break;
+        case ChoiceMain_1.ChoiceMain.DELETE:
+            deleteFeature();
             break;
     }
 }
